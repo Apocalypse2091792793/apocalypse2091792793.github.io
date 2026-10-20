@@ -1,0 +1,307 @@
+
+        body {
+            font-family: 楷体, KaiTi, serif;
+            text-align: center;
+            padding: 50px;
+            margin: 0;
+            background: linear-gradient(135deg, #d4e9ff 0%, #c8ddf0 50%, #e8f4ff 100%);
+            min-height: 100vh;
+        }
+
+        /* ===== 注册页面 ===== */
+        #register-page {
+            display: block;
+            width: 650px;
+            margin: 20px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            text-align: left;
+        }
+
+        #register-page h1 {
+            color: #1a3a6b;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        /* 填写说明 */
+        .instructions {
+            background: #f8f4ff;
+            border: 1px solid #d4bfff;
+            border-left: 5px solid #8b5cf6;
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+        }
+        .instructions p {
+            margin: 6px 0;
+            font-size: 14px;
+            color: #555;
+            text-align: left;
+        }
+        .instructions .star {
+            color: #8b5cf6;
+            font-weight: bold;
+        }
+
+        /* 表单 */
+        .form-row {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .form-row label {
+            width: 140px;
+            font-weight: bold;
+            color: #1a3a6b;
+            text-align: right;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .form-row label .req {
+            color: #e74c3c;
+            margin-right: 2px;
+        }
+        .form-row input, .form-row select {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-family: 楷体, KaiTi, serif;
+            font-size: 15px;
+        }
+        .form-row input:focus, .form-row select:focus {
+            outline: none;
+            border-color: #5a9fd4;
+            box-shadow: 0 0 5px rgba(90,159,212,0.3);
+        }
+        .form-row .addr-group {
+            display: flex;
+            gap: 8px;
+            flex: 1;
+        }
+        .form-row .addr-group select {
+            flex: 1;
+        }
+
+        .form-row .hint {
+            font-size: 12px;
+            color: #999;
+            margin-left: 155px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        .form-row .hint.ok { color: #27ae60; }
+        .form-row .hint.err { color: #e74c3c; }
+
+        .btn-register {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #5a9fd4, #6fb5e9);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .btn-register:hover {
+            opacity: 0.9;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+        .login-link a {
+            color: #5a9fd4;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        /* ===== 登录页面 ===== */
+        #login-page {
+            display: none;
+            width: 400px;
+            margin: 100px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+        #login-page h1 {
+            color: #1a3a6b;
+            margin-bottom: 30px;
+        }
+        #login-page input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-family: 楷体, KaiTi, serif;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .btn-login {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #5a9fd4, #6fb5e9);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* ===== 个人简介页（源代码原版） ===== */
+        #home {
+            display: block;
+        }
+        #home h1 {
+            color: #1a3a6b;
+            text-align: center;
+        }
+        #home p {
+            color: #666;
+            text-align: center;
+        }
+        #home table {
+            margin: 0 auto;
+            width: 500px;
+            background: white;
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        #home td {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+        }
+        #home td:last-child {
+            border-bottom: none;
+        }
+        #home .label {
+            color: #1a3a6b;
+            font-weight: bold;
+            width: 120px;
+        }
+
+        /* ===== 留言板（源代码原版） ===== */
+        #liuyan {
+            display: none;
+        }
+        .box {
+            width: 500px;
+            margin: 30px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-family: 楷体, KaiTi, serif;
+            font-size: 16px;
+            box-sizing: border-box;
+            resize: none;
+        }
+        .btn-send {
+            margin-top: 15px;
+            width: 100%;
+            padding: 12px;
+            background-color: #1a3a6b;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .btn-send:hover {
+            background-color: #2a4a7b;
+        }
+        .switch-btn {
+            display: block;
+            text-align: center;
+            color: #1a3a6b;
+            font-size: 18px;
+            text-decoration: none;
+            margin-top: 25px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            width: auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .switch-btn:hover {
+            text-decoration: underline;
+            background: none;
+        }
+
+        /* 留言列表 */
+        .msg-item {
+            background: #f8f9ff;
+            border-left: 4px solid #5a9fd4;
+            padding: 12px 15px;
+            margin-bottom: 12px;
+            border-radius: 6px;
+            text-align: left;
+        }
+        .msg-item .msg-meta {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 5px;
+        }
+        .msg-item .msg-text {
+            color: #333;
+            font-size: 15px;
+        }
+
+        /* 退出按钮 */
+        .btn-logout {
+            position: fixed;
+            top: 15px;
+            right: 20px;
+            padding: 8px 18px;
+            background: rgba(255,255,255,0.9);
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 楷体, KaiTi, serif;
+            font-size: 14px;
+        }
+        .btn-logout:hover {
+            background: #e74c3c;
+            color: white;
+            border-color: #e74c3c;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 30px;
+            border-radius: 8px;
+            color: white;
+            font-size: 15px;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .toast.show { opacity: 1; }
+        .toast.success { background: #27ae60; }
+        .toast.error { background: #e74c3c; }
+    
