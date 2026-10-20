@@ -1,16 +1,11 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta charset="utf-8">
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta charset="utf-8">
     <title>个人简介 - 会员注册</title>
-    
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
     <!-- Toast -->
@@ -19,8 +14,15 @@
     <!-- 退出按钮 -->
     <button class="btn-logout" onclick="doLogout()" id="logoutBtn" style="display:none;">退出登录</button>
 
+    <!-- 深色模式切换按钮 -->
+    <button id="themeToggle" onclick="toggleTheme()" title="切换日间/夜间模式">🌙 夜间</button>
+
+    <!-- 回到顶部悬浮按钮（挑战2） -->
+    <button id="backToTop" onclick="scrollToTop()" title="回到顶部">↑ 顶部</button>
+
     <!-- ===== ① 注册页面 ===== -->
     <div id="register-page">
+        <div class="top-nav" id="nav-register-page"></div>
         <h1>📝 会员信息注册</h1>
         <div class="instructions">
             <p><span class="star">★</span> 为保证供求信息的可靠性，请您如实填写</p>
@@ -105,6 +107,7 @@
 
     <!-- ===== ② 登录页面 ===== -->
     <div id="login-page">
+        <div class="top-nav" id="nav-login-page"></div>
         <h1>🔐 用户登录</h1>
         <input type="text" id="login-user" placeholder="用户名">
         <input type="password" id="login-pwd" placeholder="密码">
@@ -114,47 +117,167 @@
         </div>
     </div>
 
-    <!-- ===== ③ 个人简介页（源代码原版，内容固定为"星期五"） ===== -->
+    <!-- ===== ③ 个人简介页（华丽版） ===== -->
     <div id="home">
-        <h1>
-            1-05 个人信息
-        </h1>
-        <table>
-            <tr>
-                <td class="label">姓名</td>
-                <td>星期五</td>
-            </tr>
-            <tr>
-                <td class="label">年龄</td>
-                <td>18</td>
-            </tr>
-            <tr>
-                <td class="label">城市</td>
-                <td>江苏-南京</td>
-            </tr>
-            <tr>
-                <td class="label">职业</td>
-                <td>野人</td>
-            </tr>
-            <tr>
-                <td class="label">技能</td>
-                <td>程序设计</td>
-            </tr>
-            <tr>
-                <td class="label">关于我</td>
-                <td>一个擅长程序设计的野人</td>
-            </tr>
-            <tr>
-                <td class="label">联系方式</td>
-                <td>邮箱：Friday@163.com/电话:111</td>
-            </tr>
-        </table>
-        <button class="switch-btn" onclick="showLiuyan()">💬 给我留言</button>
-        <button class="switch-btn" onclick="showLogin()">🔐 登录 / 注册</button>
+        <div class="top-nav" id="nav-home"></div>
+        <!-- 顶部头像与标题区 -->
+        <div class="profile-hero">
+            <div class="avatar-wrap">
+                <div class="avatar">🧑‍💻</div>
+                <div class="avatar-ring"></div>
+            </div>
+            <h1 class="profile-title">1-05 个人信息</h1>
+            <p class="profile-subtitle">一个擅长程序设计的野人 · 星期五</p>
+            <p class="welcome-text" id="welcomeText"></p>
+            <div class="profile-tags">
+                <span class="tag">🌿 野人</span>
+                <span class="tag">💻 程序设计</span>
+                <span class="tag">📍 江苏南京</span>
+            </div>
+        </div>
+
+        <!-- 信息卡片网格 -->
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="info-icon">👤</div>
+                <div class="info-body">
+                    <div class="info-label">姓名</div>
+                    <div class="info-value">星期五</div>
+                </div>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">🎂</div>
+                <div class="info-body">
+                    <div class="info-label">年龄</div>
+                    <div class="info-value">18</div>
+                </div>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">📍</div>
+                <div class="info-body">
+                    <div class="info-label">城市</div>
+                    <div class="info-value">江苏-南京</div>
+                </div>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">🎯</div>
+                <div class="info-body">
+                    <div class="info-label">职业</div>
+                    <div class="info-value">野人</div>
+                </div>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">🛠️</div>
+                <div class="info-body">
+                    <div class="info-label">技能</div>
+                    <div class="info-value">程序设计</div>
+                </div>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">✉️</div>
+                <div class="info-body">
+                    <div class="info-label">联系方式</div>
+                    <div class="info-value">Friday@163.com / 111</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 关于我（整行） -->
+        <div class="info-card about-card">
+            <div class="info-icon">💬</div>
+            <div class="info-body">
+                <div class="info-label">关于我</div>
+                <div class="info-value">一个擅长程序设计的野人</div>
+            </div>
+        </div>
+
+        <!-- 座右铭 / 爱好 / 目标 -->
+        <div class="info-grid extra-grid">
+            <div class="info-card">
+                <div class="info-icon">🌟</div>
+                <div class="info-body">
+                    <div class="info-label">座右铭</div>
+                    <div class="info-value">代码改变世界，野性点燃灵感</div>
+                </div>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">🎨</div>
+                <div class="info-body">
+                    <div class="info-label">爱好</div>
+                    <div class="info-value">编程 · 探险 · 阅读</div>
+                </div>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">🚀</div>
+                <div class="info-body">
+                    <div class="info-label">目标</div>
+                    <div class="info-value">成为顶尖的全栈工程师</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 操作按钮 -->
+        <div class="home-actions">
+            <button class="btn-primary" onclick="showLiuyan()">💬 给我留言</button>
+            <button class="btn-secondary" onclick="showLogin()">🔐 登录 / 注册</button>
+        </div>
+
+        <!-- 访客信息区域（页脚） -->
+        <div class="visitor-footer" id="visitorFooter">
+            <div class="vf-header">
+                <span class="vf-title">👁️ 访客信息</span>
+                <span class="vf-update" id="vfUpdate"></span>
+            </div>
+            <div class="vf-grid">
+                <div class="vf-card">
+                    <div class="vf-icon">🌐</div>
+                    <div class="vf-body">
+                        <div class="vf-label">浏览器</div>
+                        <div class="vf-value" id="vfBrowser">检测中…</div>
+                    </div>
+                </div>
+                <div class="vf-card">
+                    <div class="vf-icon">🖥️</div>
+                    <div class="vf-body">
+                        <div class="vf-label">屏幕分辨率</div>
+                        <div class="vf-value" id="vfScreen">检测中…</div>
+                    </div>
+                </div>
+                <div class="vf-card">
+                    <div class="vf-icon">🪟</div>
+                    <div class="vf-body">
+                        <div class="vf-label">当前窗口</div>
+                        <div class="vf-value" id="vfViewport">检测中…</div>
+                    </div>
+                </div>
+                <div class="vf-card">
+                    <div class="vf-icon">🕒</div>
+                    <div class="vf-body">
+                        <div class="vf-label">访问时间</div>
+                        <div class="vf-value" id="vfTime">检测中…</div>
+                    </div>
+                </div>
+                <div class="vf-card highlight">
+                    <div class="vf-icon">🔢</div>
+                    <div class="vf-body">
+                        <div class="vf-label">访问次数</div>
+                        <div class="vf-value" id="vfCount">检测中…</div>
+                    </div>
+                </div>
+                <div class="vf-card timer">
+                    <div class="vf-icon">⏱️</div>
+                    <div class="vf-body">
+                        <div class="vf-label">本次已停留</div>
+                        <div class="vf-value" id="vfTimer">00:00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- ===== ④ 留言板（源代码原版） ===== -->
+    <!-- ===== ④ 留言板 ===== -->
     <div id="liuyan">
+        <div class="top-nav" id="nav-liuyan"></div>
         <h1>💬 留言板</h1>
         <div class="box">
             <div id="loginTip" style="display:none; background:#fff8e6; border:1px solid #ffe08a; border-left:4px solid #f0ad4e; padding:10px 15px; border-radius:6px; margin-bottom:15px; text-align:left; font-size:14px; color:#8a6d3b;">
@@ -163,12 +286,17 @@
             <textarea id="msgInput" placeholder="写下你想对我说的话..."></textarea>
             <button class="btn-send" onclick="saveTxt()">发送留言</button>
             <div id="msgList"></div>
-            <button class="switch-btn" onclick="showHome()" style="margin-top:20px;">← 返回首页</button>
-            <button class="switch-btn" onclick="showLogin()" style="margin-top:10px;">🔐 登录 / 注册</button>
+            <div class="back-actions">
+                <button class="switch-btn" onclick="goBack()">← 返回上一页（history.back）</button>
+                <button class="switch-btn primary" onclick="goHome()">🏠 回到首页（showHome）</button>
+            </div>
+            <div class="back-note">
+                💡 <b>两者区别：</b><code>history.back()</code> 调用浏览器历史栈回退一步，若本站是入口页则会直接离开本站；<code>goHome()</code> 调用站内 <code>showHome()</code>，始终停在本站内并重置为首页。
+            </div>
         </div>
     </div>
 
-    
     <script src="app.js"></script>
+    <div id="backToTop" class="back-to-top" title="回到顶部">&#8593;</div>
 </body>
 </html>
