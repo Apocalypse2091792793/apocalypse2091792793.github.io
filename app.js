@@ -140,6 +140,27 @@ function showHome() {
     showPage('home');
     refreshVisitorInfo();
     playWelcome();
+    animateSkills();   // 技能条动画填充
+}
+
+/* 技能条动画：回到首页时把进度条从 0 填充到目标百分比 */
+var skillAnimated = false;
+function animateSkills() {
+    var fills = document.querySelectorAll('.skill-fill');
+    if (!fills.length) return;
+    fills.forEach(function (bar) {
+        bar.style.width = '0';           // 先归零
+    });
+    // 下一帧再设置目标宽度，触发 transition 动画
+    requestAnimationFrame(function () {
+        setTimeout(function () {
+            fills.forEach(function (bar) {
+                bar.style.width = bar.getAttribute('style').match(/--w:\s*([0-9]+)%/)
+                    ? bar.getAttribute('style').match(/--w:\s*([0-9]+)%/)[1] + '%'
+                    : bar.style.getPropertyValue('--w');
+            });
+        }, 60);
+    });
 }
 // 进入留言板前先校验登录态
 function showLiuyan() {
