@@ -8,6 +8,12 @@
 </head>
 <body>
 
+    <!-- 全站背景图（固定在视口最底层，加遮罩保证文字可读） -->
+    <div class="page-bg" id="pageBg" aria-hidden="true"></div>
+    <div class="bg-blob blob-1" aria-hidden="true"></div>
+    <div class="bg-blob blob-2" aria-hidden="true"></div>
+    <div class="bg-blob blob-3" aria-hidden="true"></div>
+
     <!-- Toast -->
     <div class="toast" id="toast"></div>
 
@@ -16,9 +22,6 @@
 
     <!-- 深色模式切换按钮 -->
     <button id="themeToggle" onclick="toggleTheme()" title="切换日间/夜间模式">🌙 夜间</button>
-
-    <!-- 回到顶部悬浮按钮（挑战2） -->
-    <button id="backToTop" onclick="scrollToTop()" title="回到顶部">↑ 顶部</button>
 
     <!-- ===== ① 注册页面 ===== -->
     <div id="register-page">
@@ -123,8 +126,9 @@
         <!-- 顶部头像与标题区 -->
         <div class="profile-hero">
             <div class="avatar-wrap">
-                <div class="avatar">🧑‍💻</div>
+                <img class="avatar-photo" src="https://picsum.photos/seed/avatar-wild/240/240" alt="我的头像" onerror="this.style.display='none'">
                 <div class="avatar-ring"></div>
+                <img class="avatar-deco" src="https://picsum.photos/seed/hero-deco/80/80" alt="">
             </div>
             <h1 class="profile-title">1-05 个人信息</h1>
             <p class="profile-subtitle">一个擅长程序设计的野人 · 星期五</p>
@@ -136,82 +140,130 @@
             </div>
         </div>
 
-        <!-- 信息卡片网格 -->
-        <div class="info-grid">
-            <div class="info-card">
-                <div class="info-icon">👤</div>
-                <div class="info-body">
-                    <div class="info-label">姓名</div>
-                    <div class="info-value">星期五</div>
+        <!-- 基本信息（纵向长版：两列，每行一项，左侧标签右侧内容） -->
+        <div class="profile-section">
+            <div class="section-title"><span>📋 基本信息</span></div>
+            <div class="info-list">
+                <div class="info-row">
+                    <div class="info-icon">👤</div>
+                    <div class="info-body">
+                        <div class="info-label">姓名</div>
+                        <div class="info-value">星期五</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">🎂</div>
+                    <div class="info-body">
+                        <div class="info-label">年龄</div>
+                        <div class="info-value">18 岁</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">📍</div>
+                    <div class="info-body">
+                        <div class="info-label">城市</div>
+                        <div class="info-value">江苏 · 南京</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">🎯</div>
+                    <div class="info-body">
+                        <div class="info-label">职业</div>
+                        <div class="info-value">野人 / 程序设计爱好者</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">✉️</div>
+                    <div class="info-body">
+                        <div class="info-label">联系方式</div>
+                        <div class="info-value">Friday@163.com　·　111</div>
+                    </div>
                 </div>
             </div>
-            <div class="info-card">
-                <div class="info-icon">🎂</div>
-                <div class="info-body">
-                    <div class="info-label">年龄</div>
-                    <div class="info-value">18</div>
+        </div>
+
+        <!-- 专业技能（纵向长版：每项一条进度条 + 约50字详细说明） -->
+        <div class="profile-section">
+            <div class="section-title"><span>🛠️ 专业技能</span></div>
+            <div class="skills-list">
+                <div class="skill-item">
+                    <div class="skill-head">
+                        <div class="skill-name">🖥️ 前端开发（HTML / CSS / JavaScript）</div>
+                        <div class="skill-percent">85%</div>
+                    </div>
+                    <div class="skill-desc">熟练掌握 HTML5 语义化标签与 CSS3 动画、Flex/Grid 布局，能用原生 JavaScript 操作 DOM、实现 localStorage 数据持久化与事件驱动交互，可独立搭建响应式单页应用。</div>
+                    <div class="skill-bar"><div class="skill-fill" style="--w:85%;--c1:#8b5cf6;--c2:#5a9fd4"></div></div>
                 </div>
-            </div>
-            <div class="info-card">
-                <div class="info-icon">📍</div>
-                <div class="info-body">
-                    <div class="info-label">城市</div>
-                    <div class="info-value">江苏-南京</div>
+                <div class="skill-item">
+                    <div class="skill-head">
+                        <div class="skill-name">⚙️ 后端与数据库基础</div>
+                        <div class="skill-percent">70%</div>
+                    </div>
+                    <div class="skill-desc">了解 Node.js 与 Express 框架的基本用法，能用 MySQL 与 MongoDB 完成常见的增删改查操作，理解 RESTful API 的设计规范与前后端数据交互的基本流程。</div>
+                    <div class="skill-bar"><div class="skill-fill" style="--w:70%;--c1:#10b981;--c2:#34d399"></div></div>
                 </div>
-            </div>
-            <div class="info-card">
-                <div class="info-icon">🎯</div>
-                <div class="info-body">
-                    <div class="info-label">职业</div>
-                    <div class="info-value">野人</div>
+                <div class="skill-item">
+                    <div class="skill-head">
+                        <div class="skill-name">🐍 Python 与数据爬取</div>
+                        <div class="skill-percent">75%</div>
+                    </div>
+                    <div class="skill-desc">熟练使用 Python 编写自动化脚本，能用 requests 与 BeautifulSoup 抓取网页数据，配合 pandas 做简单的数据清洗与可视化，也用过 Flask 搭建过小型接口服务。</div>
+                    <div class="skill-bar"><div class="skill-fill" style="--w:75%;--c1:#ec4899;--c2:#f472b6"></div></div>
                 </div>
-            </div>
-            <div class="info-card">
-                <div class="info-icon">🛠️</div>
-                <div class="info-body">
-                    <div class="info-label">技能</div>
-                    <div class="info-value">程序设计</div>
+                <div class="skill-item">
+                    <div class="skill-head">
+                        <div class="skill-name">🔧 Git 版本控制与协作</div>
+                        <div class="skill-percent">65%</div>
+                    </div>
+                    <div class="skill-desc">日常使用 Git 进行代码版本管理，熟悉分支创建、合并、冲突解决与回滚操作，能在 GitHub 上完成团队协作开发，了解 Pull Request 与 Code Review 的基本流程。</div>
+                    <div class="skill-bar"><div class="skill-fill" style="--w:65%;--c1:#f59e0b;--c2:#fbbf24"></div></div>
                 </div>
-            </div>
-            <div class="info-card">
-                <div class="info-icon">✉️</div>
-                <div class="info-body">
-                    <div class="info-label">联系方式</div>
-                    <div class="info-value">Friday@163.com / 111</div>
+                <div class="skill-item">
+                    <div class="skill-head">
+                        <div class="skill-name">🎨 UI 设计与用户体验</div>
+                        <div class="skill-percent">72%</div>
+                    </div>
+                    <div class="skill-desc">注重页面视觉层次与配色协调，善用渐变、毛玻璃与微动效提升质感，能独立完成从原型到上线的界面设计，关注可访问性与多端适配的显示效果。</div>
+                    <div class="skill-bar"><div class="skill-fill" style="--w:72%;--c1:#6366f1;--c2:#818cf8"></div></div>
                 </div>
             </div>
         </div>
 
         <!-- 关于我（整行） -->
-        <div class="info-card about-card">
-            <div class="info-icon">💬</div>
-            <div class="info-body">
-                <div class="info-label">关于我</div>
-                <div class="info-value">一个擅长程序设计的野人</div>
+        <div class="profile-section">
+            <div class="section-title"><span>💬 关于我</span></div>
+            <div class="info-card about-card">
+                <div class="info-icon">🌿</div>
+                <div class="info-body">
+                    <div class="info-value full">一个擅长程序设计的野人，骨子里热爱探索与创造。平时喜欢在山野间放空自己、从自然里汲取灵感，回到屏幕前又能沉下心来敲代码。我相信代码可以改变世界，而野性能点燃灵感——两者结合，是我持续成长的动力。</div>
+                </div>
             </div>
         </div>
 
-        <!-- 座右铭 / 爱好 / 目标 -->
-        <div class="info-grid extra-grid">
-            <div class="info-card">
-                <div class="info-icon">🌟</div>
-                <div class="info-body">
-                    <div class="info-label">座右铭</div>
-                    <div class="info-value">代码改变世界，野性点燃灵感</div>
+        <!-- 座右铭 / 爱好 / 目标（纵向三段，每段独立成行，内容充实） -->
+        <div class="profile-section">
+            <div class="section-title"><span>✨ 更多</span></div>
+            <div class="extra-list">
+                <div class="info-card extra-item">
+                    <div class="info-icon">🌟</div>
+                    <div class="info-body">
+                        <div class="info-label">座右铭</div>
+                        <div class="info-value full">「代码改变世界，野性点燃灵感」——用理性构建秩序，用热爱驱动坚持，每一行代码都是一次对未知世界的探索。</div>
+                    </div>
                 </div>
-            </div>
-            <div class="info-card">
-                <div class="info-icon">🎨</div>
-                <div class="info-body">
-                    <div class="info-label">爱好</div>
-                    <div class="info-value">编程 · 探险 · 阅读</div>
+                <div class="info-card extra-item">
+                    <div class="info-icon">🎨</div>
+                    <div class="info-body">
+                        <div class="info-label">爱好</div>
+                        <div class="info-value full">编程 · 户外探险 · 阅读技术书籍。闲暇时喜欢爬山徒步、在营火边思考问题，也常逛开源社区学习新框架与工具。</div>
+                    </div>
                 </div>
-            </div>
-            <div class="info-card">
-                <div class="info-icon">🚀</div>
-                <div class="info-body">
-                    <div class="info-label">目标</div>
-                    <div class="info-value">成为顶尖的全栈工程师</div>
+                <div class="info-card extra-item">
+                    <div class="info-icon">🚀</div>
+                    <div class="info-body">
+                        <div class="info-label">目标</div>
+                        <div class="info-value full">短期扎实前端工程化能力，长期目标是成为一名顶尖的全栈工程师，能独立设计并落地完整的高可用 Web 产品。</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -280,6 +332,7 @@
         <div class="top-nav" id="nav-liuyan"></div>
         <h1>💬 留言板</h1>
         <div class="box">
+            <img class="box-deco" src="https://picsum.photos/seed/liuyan-deco/600/140" alt="">
             <div id="loginTip" style="display:none; background:#fff8e6; border:1px solid #ffe08a; border-left:4px solid #f0ad4e; padding:10px 15px; border-radius:6px; margin-bottom:15px; text-align:left; font-size:14px; color:#8a6d3b;">
                 ⚠️ 留言前请先 <a onclick="showLogin()" style="color:#5a9fd4; cursor:pointer; text-decoration:underline;">登录 / 注册</a>
             </div>
@@ -296,7 +349,9 @@
         </div>
     </div>
 
+    <!-- 回到顶部悬浮按钮（body 直接子元素，避开任何祖先定位上下文） -->
+    <button id="backToTop" class="back-to-top" onclick="scrollToTop()" title="回到顶部">↑</button>
+
     <script src="app.js"></script>
-    <div id="backToTop" class="back-to-top" title="回到顶部">&#8593;</div>
 </body>
 </html>
